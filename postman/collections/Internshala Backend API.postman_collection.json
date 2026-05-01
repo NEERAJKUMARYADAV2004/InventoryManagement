@@ -258,7 +258,7 @@
     {
       "id": "cd97b93b-4501-40d1-8878-c09ecf91ecf8",
       "key": "baseUrl",
-      "value": "http://localhost:5000",
+      "value": "https://inventorymanagement-k8ny.onrender.com",
       "type": "string"
     },
     {
