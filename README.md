@@ -4,6 +4,13 @@
 
 ---
 
+## 🔗 Live Deployment
+
+*   **Frontend (Vercel)**: [https://inventory-management-murex-seven.vercel.app/](https://inventory-management-murex-seven.vercel.app/)
+*   **Backend API (Render)**: [https://inventorymanagement-k8ny.onrender.com/](https://inventorymanagement-k8ny.onrender.com/)
+
+---
+
 ## 🚀 Core Features
 
 ### **Backend (Primary Focus)**
