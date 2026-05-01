@@ -1,0 +1,277 @@
+{
+  "info": {
+    "_postman_id": "46400aaa-2b32-4746-a85d-6e59de6f5d08",
+    "name": "Internshala Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "id": "e071355d-484a-48a6-8525-dba38c55430b",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"User\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/register",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Register a new user. Role can be \"Admin\" or \"User\"."
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "if (jsonData.token) {",
+                  "  pm.collectionVariables.set(\"authToken\", jsonData.token);",
+                  "}"
+                ],
+                "id": "416e7dc6-8924-455c-9278-96b7e934cffa"
+              }
+            }
+          ],
+          "id": "39d81c43-8ed3-448f-b6af-d7ea3289a22f",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Authenticate user and get JWT token."
+          },
+          "response": []
+        }
+      ],
+      "id": "607453d9-7795-49b3-b997-521e47680cc2"
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "id": "11b1c195-9395-44dc-ad3d-25d90f3aa7cf",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ]
+            },
+            "description": "Get all products. Public access."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by ID",
+          "id": "d5ddedad-1f83-42bc-9245-e744d6fb85fd",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "{{productId}}"
+              ]
+            },
+            "description": "Get a single product by ID. Public access."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product",
+          "id": "6131caff-9da6-4138-bce8-7e7054d40bf8",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Sample Product\",\n  \"description\": \"A great product\",\n  \"price\": 29.99,\n  \"stockQuantity\": 100,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/image.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ]
+            },
+            "description": "Create a new product. Requires Admin role and JWT token."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "id": "fb0e7b99-8455-4e9b-9928-996bd497686a",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Product\",\n  \"description\": \"Updated description\",\n  \"price\": 39.99,\n  \"stockQuantity\": 50,\n  \"category\": \"Electronics\",\n  \"imageUrl\": \"https://example.com/updated-image.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "{{productId}}"
+              ]
+            },
+            "description": "Update an existing product by ID. Requires Admin role and JWT token."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "id": "1ebba20e-f2ee-4bd9-864b-0c62169d4ca1",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/products/{{productId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "{{productId}}"
+              ]
+            },
+            "description": "Delete a product by ID. Requires Admin role and JWT token."
+          },
+          "response": []
+        }
+      ],
+      "id": "de07c426-4c9f-447c-b947-1dd86adb1a83"
+    }
+  ],
+  "variable": [
+    {
+      "id": "cd97b93b-4501-40d1-8878-c09ecf91ecf8",
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "id": "da5cdccf-dfc9-4e9d-84ab-083629ad1651",
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "id": "3d4d0fe0-b06f-4711-8e1c-635f541fb286",
+      "key": "productId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

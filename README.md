@@ -1,98 +1,84 @@
-# 📦 STOCKLY | Luxury Product Inventory System
+# 📦 STOCKLY - Luxury Inventory Management
 
-STOCKLY is a premium, full-stack MERN (MongoDB, Express, React, Node.js) application designed for high-end product management and luxury commerce. It features a sophisticated glassmorphic UI, robust Role-Based Access Control (RBAC), and a seamless shopping experience.
+**STOCKLY** is a high-end, production-ready Product Inventory System built with the **MERN stack**. It features a secure, scalable backend with **Role-Based Access Control (RBAC)** and a glassmorphic, responsive frontend dashboard designed for both administrative management and user-centric commerce.
 
 ---
 
-## ✨ Key Features
+## 🚀 Core Features
 
-### 🏛️ Luxury Dashboard
-- **Glassmorphic Aesthetic**: High-end dark mode design with subtle blurs and premium gradients.
-- **Role-Based Overview**: Admins see comprehensive business metrics (Total Products, Categories, Stock Alerts) while Users get a clean, product-focused catalog.
+### **Backend (Primary Focus)**
+*   **Secure Authentication**: User registration and login powered by **JWT (JSON Web Tokens)** and **bcrypt** password hashing.
+*   **Role-Based Access Control (RBAC)**: 
+    *   **Admin**: Full CRUD permissions (Create, Read, Update, Delete) for managing the catalog.
+    *   **User**: Read-only catalog access with commerce features like "Buy Now" and automated invoice generation.
+*   **Scalable API Design**: RESTful architecture with **v1 versioning**, centralized error handling, and **Joi** input validation.
+*   **Database**: Persistent storage using **MongoDB Atlas** for high availability.
 
-### 🔐 Advanced Authentication (RBAC)
-- **Secure JWT Auth**: Sessionless authentication using JSON Web Tokens.
-- **Role Permissions**: 
-  - **Admin**: Full CRUD capabilities (Create, Read, Update, Delete) for products and inventory management.
-  - **User**: Commerce-focused experience (Browse, Add to Cart, Buy Now).
-
-### 🛒 High-End Commerce
-- **Global Cart System**: Persistent shopping cart state across the entire session.
-- **Stock Validation**: Strict inventory checks preventing users from purchasing more than available stock.
-- **Visual Grid**: 3-column responsive product cards with high-quality imagery and hover-activated commerce actions.
-
-### 📄 Automated Operations
-- **Invoice Generation**: Real-time PDF invoice generation upon checkout using `jspdf`.
-- **Inventory Tracking**: Real-time stock level updates and "Sold Out" state management.
+### **Frontend (UX/UI)**
+*   **Luxury Aesthetic**: Minimalist, glassmorphic UI using **Tailwind CSS**.
+*   **Intuitive Navigation**: Fixed-width sidebar with a circular profile dropdown and centered global search.
+*   **Responsive Product Grid**: Dynamic card-based layout with aspect-ratio-corrected product imagery and hover effects.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React, Tailwind CSS (Glassmorphism), Lucide React (Icons), Axios.
-- **Backend**: Node.js, Express.js, JWT (Security), Joi (Input Validation).
-- **Database**: MongoDB Atlas (Cloud Database).
-- **Utility**: Jspdf (Invoice generation), Bcrypt (Password hashing).
+*   **Frontend**: React.js, Tailwind CSS, Lucide Icons.
+*   **Backend**: Node.js, Express.js.
+*   **Database**: MongoDB (Atlas).
+*   **Validation**: Joi / express-validator.
+*   **Auth**: JWT, Bcrypt.
 
 ---
 
-## 🚀 Getting Started
+## ⚙️ Installation & Setup
 
-### Prerequisites
-- Node.js (v16+)
-- MongoDB Atlas Account (or local MongoDB)
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/NEERAJKUMARYADAV2004/InventoryManagement.git
+    cd InventoryManagement
+    ```
 
-### 1. Backend Setup
-```bash
-cd backend
-npm install
-```
-Create a `.env` file in the `backend` folder:
-```env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_super_secret_key
-```
-Start the server:
-```bash
-npm run dev
-```
+2.  **Environment Variables**:
+    Create a `.env` file in the `/backend` folder and add the following:
+    ```env
+    PORT=5000
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_super_secret_key
+    ```
 
-### 2. Frontend Setup
-```bash
-cd frontend
-npm install
-```
-Start the development server:
-```bash
-npm run dev
-```
+3.  **Run the Project**:
+    *   **Backend**: `cd backend && npm install && npm start`
+    *   **Frontend**: `cd frontend && npm install && npm run dev`
 
 ---
 
-## 🏗️ Project Structure
+## 🧪 API Documentation
 
-```text
-├── backend/
-│   ├── controllers/   # Business logic for products/auth
-│   ├── models/        # Mongoose schemas (User, Product)
-│   ├── routes/        # API endpoints (v1 architecture)
-│   ├── middleware/    # Auth & Error handling
-│   └── seeder.js      # Database population script
-└── frontend/
-    ├── src/
-    │   ├── components/# Reusable UI (Header, Sidebar, Modal)
-    │   ├── context/   # Global State (Auth, Cart)
-    │   ├── pages/     # Main views (Dashboard, Cart, Auth)
-    │   └── utils/     # Invoicing & helper functions
-```
+The full Postman collection is included in this repository to facilitate testing. It includes automated scripts to handle token authentication.
+
+*   **Path**: `/postman/collections/Internshala Backend API.postman_collection.json`
+*   **Variables**: Set the `baseUrl` to `http://localhost:5000` inside Postman.
 
 ---
 
-## 💎 Design Philosophy
-STOCKLY is built on the principle of **"Minimalist Opulence."** By utilizing `backdrop-blur` and deep-dark color palettes (`#020617`), the application provides a distraction-free environment that emphasizes the visual quality of the luxury products.
+## 📈 Scalability & Deployment Note
+
+To scale **STOCKLY** for production-level traffic, I would implement the following:
+1.  **Caching**: Use **Redis** for the "Get All Products" endpoint to reduce database latency for frequent catalog views.
+2.  **Microservices**: Decouple the Invoice Generation and Authentication logic into independent services to handle high concurrent user loads.
+3.  **Load Balancing**: Deploy behind an **Nginx** or **AWS ELB** to distribute traffic across multiple instances of the Node.js server.
+4.  **Containerization**: Use **Docker** to ensure consistent development and production environments.
 
 ---
 
-## 👨‍💻 Developer
-Developed for the **Internshala MERN Stack Assessment**.
+## 👤 Author
+
+**Neeraj Kumar Yadav**  
+*Frontend Engineer | UX Designer | AI-Integrated Workflows*  
+[LinkedIn](https://www.linkedin.com/in/neerajkumaryaduvanshi7232/) | [GitHub](https://github.com/NEERAJKUMARYADAV2004)
+
+---
+
+### **Submission Note**
+This project was developed within the 2-hour scope for the Internshala Backend Developer (Intern) Assignment. All core requirements, including JWT Auth, RBAC, and CRUD functionality, have been fully implemented and tested.
